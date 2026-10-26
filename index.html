@@ -1,3 +1,6 @@
+---
+# Page traitée par Jekyll : les contenus viennent de _contenus/ et _data/textes.yml (modifiables via Pages CMS)
+---
 <!doctype html>
 <html lang="fr">
 <head>
@@ -44,23 +47,15 @@
     <!-- Suivi du projet -->
     <section id="suivi" class="section">
       <h2 class="section-title">Suivi du projet</h2>
-      <p class="lead">
-        Un projet de data center est envisagé à Rantigny (Oise).
-        Voici ce qu'il représente pour notre territoire&nbsp;:
-      </p>
+      <p class="lead">{{ site.data.textes.suivi_intro }}</p>
 
       <ul class="impacts">
-        <li><span class="tag">22 hectares</span><strong>Perte de terres agricoles</strong></li>
-        <li><span class="tag">Une centaine d'espèces protégées</span><strong>Recul de la biodiversité</strong></li>
-        <li><span class="tag">Jusqu'à +2&nbsp;°C sur 1 à 2&nbsp;km</span><strong>Hausse des températures</strong></li>
-        <li><span class="tag">Au détriment des usagers</span><strong>Tension sur le réseau électrique</strong></li>
-        <li><span class="tag">Vrombissements et infrasons permanents</span><strong>Pollution sonore</strong></li>
-        <li><span class="tag">Éclairage nocturne</span><strong>Pollution lumineuse</strong></li>
-        <li><span class="tag">120 groupes électrogènes</span><strong>Consommation énergivore</strong></li>
-        <li><span class="tag">Polluants éternels</span><strong>Ressource en eau fragilisée</strong></li>
-        <li><span class="tag">Un porteur de projet américain</span><strong>Mensonge sur la souveraineté numérique</strong></li>
-        <li><span class="tag">Une dizaine d'emplois précaires</span><strong>Retombées économiques décevantes</strong></li>
+        {%- for impact in site.data.textes.impacts %}
+        <li><span class="tag">{{ impact.chiffre }}</span><strong>{{ impact.titre }}</strong></li>
+        {%- endfor %}
       </ul>
+
+      {% include contenus.html onglet="suivi" %}
     </section>
 
     <!-- Nos actions -->
@@ -88,6 +83,8 @@
           <p>Partagez ce site, la pétition et nos tracts avec vos voisins, vos proches et vos élus.</p>
         </div>
       </div>
+
+      {% include contenus.html onglet="actions" %}
     </section>
 
     <!-- On parle de nous -->
@@ -95,21 +92,7 @@
       <h2 class="section-title">On parle de nous</h2>
       <p class="lead">Articles, reportages et interviews sur notre mobilisation.</p>
 
-      <div class="press">
-        <!--
-          POUR AJOUTER UN ARTICLE : copier le bloc ci-dessous, le coller juste en dessous
-          de ce commentaire (les plus récents en premier), puis remplir les infos.
-          Supprimer ensuite le bloc « press-empty » quand il y a au moins un article.
-
-        <a class="press-item" href="LIEN_DE_L_ARTICLE" target="_blank" rel="noopener">
-          <span class="press-meta">NOM DU MÉDIA · JJ/MM/AAAA</span>
-          <strong>Titre de l'article</strong>
-          <span class="press-more">Lire l'article →</span>
-        </a>
-        -->
-
-        <p class="press-empty card card--center">Les premiers articles arrivent bientôt&nbsp;!</p>
-      </div>
+      {% include contenus.html onglet="presse" vide="Les premiers articles arrivent bientôt !" %}
     </section>
 
     <!-- Nos réseaux -->
@@ -140,8 +123,10 @@
     <section id="qui" class="section">
       <h2 class="section-title">Qui sommes-nous&nbsp;?</h2>
       <div class="card card--center">
-        <p class="big">Un collectif de divers horizons contre le projet de data center.</p>
+        <p class="big">{{ site.data.textes.qui_sommes_nous }}</p>
       </div>
+
+      {% include contenus.html onglet="qui" %}
     </section>
 
     <!-- Rejoignez-nous -->
@@ -201,6 +186,8 @@
           <a class="btn btn--outline" href="bulletin-adhesion-dincca.pdf" download>Tract + bulletin PDF</a>
         </aside>
       </div>
+
+      {% include contenus.html onglet="rejoindre" %}
     </section>
 
     <!-- Nous contacter -->

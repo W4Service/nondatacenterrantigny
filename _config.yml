@@ -1,0 +1,15 @@
+# Configuration Jekyll (utilisée automatiquement par GitHub Pages)
+title: Non au Data Center – Rantigny
+lang: fr
+timezone: Europe/Paris
+
+# Contenus ajoutés depuis Pages CMS (vidéos, tracts, documents, articles…)
+collections:
+  contenus:
+    output: false
+
+exclude:
+  - OPENME
+  - OPENME.zip
+  - GUIDE-ADMIN.md
+  - README.md

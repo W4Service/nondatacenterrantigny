@@ -1,0 +1,84 @@
+# Configuration de l'espace d'administration Pages CMS (https://app.pagescms.org)
+media:
+  input: fichiers
+  output: /fichiers
+
+content:
+  - name: contenus
+    label: Contenus du site
+    type: collection
+    path: _contenus
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      fields: [title, onglet, date]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: onglet
+        label: Dans quel onglet ?
+        type: select
+        required: true
+        options:
+          values:
+            - name: suivi
+              label: Suivi du projet
+            - name: actions
+              label: Nos actions
+            - name: presse
+              label: On parle de nous
+            - name: qui
+              label: Qui sommes-nous
+            - name: rejoindre
+              label: Rejoignez-nous
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: source
+        label: Source (nom du média, auteur…) – facultatif
+        type: string
+      - name: image
+        label: Image d'illustration – facultatif
+        type: image
+      - name: fichier
+        label: Fichier à télécharger (PDF, Word, affiche, petite vidéo…) – facultatif
+        type: file
+      - name: video
+        label: Lien d'une vidéo (YouTube, TikTok, Facebook, Instagram…) – facultatif
+        type: string
+      - name: lien
+        label: Lien vers une page externe (article de presse…) – facultatif
+        type: string
+      - name: body
+        label: Texte – facultatif
+        type: rich-text
+
+  - name: textes
+    label: Textes fixes du site
+    type: file
+    path: _data/textes.yml
+    fields:
+      - name: suivi_intro
+        label: Introduction de « Suivi du projet »
+        type: text
+      - name: impacts
+        label: Cartes « Suivi du projet »
+        type: object
+        list: true
+        fields:
+          - name: chiffre
+            label: Texte rouge (chiffre, précision)
+            type: string
+          - name: titre
+            label: Titre en gras
+            type: string
+      - name: qui_sommes_nous
+        label: Texte « Qui sommes-nous ? »
+        type: text

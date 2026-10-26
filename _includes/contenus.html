@@ -1,0 +1,60 @@
+{%- comment -%}
+  Affiche les contenus ajoutés via Pages CMS pour un onglet donné.
+  Utilisation : {% include contenus.html onglet="presse" %}
+{%- endcomment -%}
+{%- assign items = site.contenus | where: "onglet", include.onglet | sort: "date" | reverse -%}
+{%- if items.size > 0 -%}
+<div class="contenus">
+  {%- for item in items -%}
+  {%- assign v = item.video | strip -%}
+  {%- assign yt = "" -%}
+  {%- if v contains "youtube.com/watch" -%}
+    {%- assign yt = v | split: "v=" | last | split: "&" | first -%}
+  {%- elsif v contains "youtu.be/" -%}
+    {%- assign yt = v | split: "youtu.be/" | last | split: "?" | first -%}
+  {%- elsif v contains "youtube.com/shorts/" -%}
+    {%- assign yt = v | split: "shorts/" | last | split: "?" | first -%}
+  {%- endif -%}
+  {%- assign ext = "" -%}
+  {%- if item.fichier -%}{%- assign ext = item.fichier | split: "." | last | downcase -%}{%- endif -%}
+  {%- assign fichier_video = false -%}
+  {%- if ext == "mp4" or ext == "webm" or ext == "mov" -%}{%- assign fichier_video = true -%}{%- endif -%}
+  {%- assign fichier_image = false -%}
+  {%- if ext == "jpg" or ext == "jpeg" or ext == "png" or ext == "webp" or ext == "gif" -%}{%- assign fichier_image = true -%}{%- endif -%}
+  <article class="contenu">
+    {%- if yt != "" %}
+    <div class="contenu-media contenu-media--video">
+      <iframe src="https://www.youtube-nocookie.com/embed/{{ yt }}" title="{{ item.title | escape }}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    {%- elsif fichier_video %}
+    <video class="contenu-media" src="{{ item.fichier | relative_url }}" controls preload="metadata"></video>
+    {%- elsif item.image %}
+    <img class="contenu-media" src="{{ item.image | relative_url }}" alt="" loading="lazy">
+    {%- elsif fichier_image %}
+    <img class="contenu-media" src="{{ item.fichier | relative_url }}" alt="" loading="lazy">
+    {%- endif %}
+    <div class="contenu-body">
+      <p class="contenu-meta">{% if item.source %}{{ item.source }} · {% endif %}{{ item.date | date: "%d/%m/%Y" }}</p>
+      <h3>{{ item.title }}</h3>
+      {%- assign texte = item.content | strip -%}
+      {%- if texte != "" %}
+      <div class="contenu-texte">{{ texte | markdownify }}</div>
+      {%- endif %}
+      <div class="contenu-actions">
+        {%- if item.fichier and fichier_video == false %}
+        <a class="btn" href="{{ item.fichier | relative_url }}" download>Télécharger ({{ ext | upcase }})</a>
+        {%- endif %}
+        {%- if v != "" and yt == "" %}
+        <a class="btn" href="{{ v }}" target="_blank" rel="noopener">Voir la vidéo</a>
+        {%- endif %}
+        {%- if item.lien and item.lien != "" %}
+        <a class="btn btn--outline" href="{{ item.lien }}" target="_blank" rel="noopener">{% if include.onglet == "presse" %}Lire l'article{% else %}En savoir plus{% endif %}</a>
+        {%- endif %}
+      </div>
+    </div>
+  </article>
+  {%- endfor %}
+</div>
+{%- elsif include.vide %}
+<p class="card card--center contenus-vide">{{ include.vide }}</p>
+{%- endif -%}
