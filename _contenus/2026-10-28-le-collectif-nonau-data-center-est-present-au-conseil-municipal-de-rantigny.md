@@ -1,5 +1,5 @@
 ---
-title: le collectif Non au Data Center est présent au conseil municipal de Rantigny
+title: "Tous ensemble le 07 Novembre "
 onglet: actions
 date: 2026-10-28
 source: Tous ensemble le 07 Novembre
