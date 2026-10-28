@@ -1,8 +1,8 @@
 ---
 title: le collectif Non au Data Center est présent au conseil municipal de Rantigny
-onglet: presse
+onglet: actions
 date: 2026-10-28
-source: article Courrier Picard
-fichier: /fichiers/article courrier picard 181026-1.jpeg
+source: Tous ensemble le 07 Novembre
+fichier: /fichiers/marche du 07  Novembre.png
 ---
-Nous étions plus de 50 membres du collectif non au data Center de Rantigny présents au conseil municipal de Rantigny pour faire entendre notre opposition au projet de construction du DATA CENTER
+Venez nombreux exprimer dans la joie et la bonne humeur votre opposition au projet de construction du DATA Center de Rantigny
