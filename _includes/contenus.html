@@ -2,7 +2,7 @@
   Affiche les contenus ajoutés via Pages CMS pour un onglet donné.
   Utilisation : {% include contenus.html onglet="presse" %}
 {%- endcomment -%}
-{%- assign items = site.contenus | where: "onglet", include.onglet | sort: "date" | reverse -%}
+{%- assign items = site.contenus | where: "onglet", include.onglet | where_exp: "item", "item.masquer != true" | sort: "date" | reverse -%}
 {%- if items.size > 0 -%}
 <div class="contenus">
   {%- for item in items -%}

@@ -10,7 +10,7 @@ content:
     path: _contenus
     filename: "{year}-{month}-{day}-{primary}.md"
     view:
-      fields: [title, onglet, date]
+      fields: [title, onglet, date, masquer]
       primary: title
       sort: [date, title]
       default:
@@ -41,6 +41,9 @@ content:
         label: Date
         type: date
         required: true
+      - name: masquer
+        label: Masquer sur le site (cocher pour cacher sans supprimer)
+        type: boolean
       - name: source
         label: Source (nom du média, auteur…) – facultatif
         type: string
